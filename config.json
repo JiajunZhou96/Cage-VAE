@@ -1,0 +1,68 @@
+
+
+{
+    "seed": 72,
+    "original_dataset": "./datasets/dataset_original.csv",
+    "augmented_dataset": "./datasets/dataset_augmented.csv",
+    "vocab": "./vocab/pretrain_vocab.npy",
+    "model_path": "./model/VAE_Model.pth",
+
+    "max_len": 52,
+    "bb1_vocab_dim": 51,
+    "reaction_vocab_dim": 6,
+
+
+    "enc_dropout": 0.25,
+    "dec_dropout": 0.25,
+    "c_enc_dropout": 0.25,
+    "c_dec_dropout": 0.25,
+    "prop_dropout": 0.5,
+
+    "vocab_dim": 30,
+    "enc_emb_dim": 36,
+    "latent_dim": 128,
+    "enc_hidden_dim": 256,
+    "dec_hidden_dim": 384,
+    "target_dim": 1,
+
+    "pad_idx": 0,
+    "sos_idx": 1,
+    "eos_idx": 2,
+
+    "clip_grad": 50,
+
+    "n_epochs": 100,
+    "sample_interval": 800,
+    "datapoint_interval": 3000,
+    "batch_size": 64,
+
+    "recon_loss_start": 0,
+    "recon_loss_stop": 1,
+    "recon_loss_offset": 0,
+    "recon_loss_offset_0": 0,
+
+    "prop_loss_start": 0,
+    "prop_loss_stop": 1,
+    "prop_loss_offset": 0,
+    "prop_loss_offset_0": 0,
+
+    "cyclic_loss_start": 0,
+    "cyclic_loss_stop": 0.0025,
+    "cyclic_loss_n_cycle": 5,
+    "cyclic_loss_ratio": 0.7,
+
+
+    "bo_file": "./log/bo.log",
+    "p_weight": 0.0025,
+    "initial_idx": 28,
+    "bo_batch": 5,
+
+    "intp_file": "./log/intp.log",
+    "lerp_type": "slerp-in",
+    "lerp_steps": 6,
+    "lerp_threshold": 0.8,
+    "current_batch": 1,
+    "intp_batch": 5
+
+}
+
