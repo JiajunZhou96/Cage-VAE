@@ -2,6 +2,8 @@
 This repository contains data and codes for Cage-VAE.
 
 ## Description
+![image](vaearchitecture.png)
+
 In this work, we present a VAE model, Cage-VAE, for the targeted generation of shape-persistent porous organic cages (POCs). We demonstrate the capacity of Cage-VAE to propose novel, shape-persistent POCs, via integration with multiple efficient sampling methods, including bayesian optimization and spherical linear interpolation.
 
 ## Contents
