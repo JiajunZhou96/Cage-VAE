@@ -44,7 +44,9 @@ $ conda install -c conda-forge rdkit=2020.09.1.0
 $ pip install stk==2021.8.2.0
 $ pip install GPyOpt==1.2.6
 $ conda install -c conda-forge pymatgen=2022.1.7
+```
 
-for interactive kernal
+For running in interactive window
+```
 $ pip install ipykernel==6.4.1
 ```
