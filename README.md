@@ -9,23 +9,23 @@ In this work, we present a VAE model, Cage-VAE, for the targeted generation of s
 ## Contents
 - Data
 
-   - Please unzip `datasets.zip` and put `original_original.csv` and `dataset_augmented.csv` to `./datasets/` directory 
+   - Please unzip `datasets.zip` and put `original_original.csv` and `dataset_augmented.csv` to `./datasets/` directory.
 
 - Main
 
-    - `dataset_analysis.py`: Overview of the original dataset;
-    - `data_augmentation.py`: Methods used to create the augmented dataset;
-    - `training.py`: Training of a new Cage-VAE
-    - `model_eval.py`: Integrated evaluations of an existing Cage-VAE
-    - `conditional_generation.py`: conditional generation of shape-persistent POCs using sampling methods
+    - `dataset_analysis.py`: Overview of the original dataset.
+    - `data_augmentation.py`: Methods used to create the augmented dataset.
+    - `training.py`: Training of a new Cage-VAE.
+    - `model_eval.py`: Integrated evaluations of an existing Cage-VAE.
+    - `conditional_generation.py`: conditional generation of shape-persistent POCs using sampling methods.
 
 - Utils
 
-    - `analysis_utils`: import as a_utils, useful tools for molecular analysis
-    - `encoding_utils`: import as e_utils, useful tools for molecular encodings and moiety modifications
-    - `VAE`: import as VAE, VAE architecture and methods
-    - `generation_utils`:import as g_utils, useful tools for molecular generations
-    - `utils`: import as utils, other utils
+    - `analysis_utils`: import as a_utils, useful tools for the analysis of the generative model.
+    - `encoding_utils`: import as e_utils, useful tools for molecular encodings and moiety modifications.
+    - `VAE`: import as VAE, VAE architecture and methods.
+    - `generation_utils`:import as g_utils, useful tools for molecular generations.
+    - `utils`: import as utils, other utils.
 
 ## Requirements<br />
 
