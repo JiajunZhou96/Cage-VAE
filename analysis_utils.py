@@ -69,54 +69,6 @@ def precursor_validity(smiles_list, validity_list):
 
 import re
 import encoding_utils as eutils
-from openbabel import pybel
-
-def smiles_tokenizer(smiles):
-    
-    smiles_char = []
-    smiles_single = eutils.double_to_single(smiles)
-    
-    pattern = re.compile('.')
-    smile_char = ','.join(pattern.findall(smiles_single))
-    single_char = smile_char.split(',')
-    smiles_char.extend(single_char)
-    
-    tokenized_smiles = []
-    for char_string in smiles_char:
-        if char_string in ['B','C','F','G','H','N','O','R','S','X','c','n','o','s']:
-            token = eutils.single_to_double(char_string)
-            tokenized_smiles.append(token)
-        else:
-            pass
-    
-    return tokenized_smiles
-
-
-def graph_canonical_labeling_symmetry(smiles):
-    
-    smiles = Chem.CanonSmiles(smiles)
-    element_tokens = smiles_tokenizer(smiles)
-    lr_idx = [i for i,element in enumerate(element_tokens) if element == '[Lr]']
-    
-    # https://baoilleach.blogspot.com/2010/11/automorphisms-isomorphisms-symmetry.html
-    ob = pybel.ob
-    mol = pybel.readstring("smi", smiles)
-    gs = ob.OBGraphSym(mol.OBMol)
-    symclasses = ob.vectorUnsignedInt()
-    gs.GetSymmetry(symclasses)
-    sym_list = list(symclasses)
-    if '[nH]' in smiles:
-        if sym_list[lr_idx[0] -1] == sym_list[lr_idx[1] -1]:
-            return True
-        else:
-            return False
-    
-    else:
-        if sym_list[lr_idx[0]] == sym_list[lr_idx[1]]:
-            return True
-        else:
-            return False
-
 import pymatgen.core
 from pymatgen.symmetry.analyzer import PointGroupAnalyzer
 def point_group_symmetry(smiles):
@@ -142,10 +94,7 @@ def symmetry_smiles(smiles_list, validity_list, sym = "point_group"):
     
     candidates = [validity_list[i] for i in index_candidate]
     
-    if sym == "graph_cano":
-        m = [graph_canonical_labeling_symmetry(smile) for smile in candidates]
-    
-    elif sym == "point_group":
+    if sym == "point_group":
         m = [point_group_symmetry(smile) for smile in candidates]
     
     return len(m)/len(smiles_list)
