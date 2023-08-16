@@ -32,7 +32,7 @@ In this work, we present a VAE model, Cage-VAE, for the targeted generation of s
 
 - Results
 
-    - `./cage/`: folder contains samples of generated cages
+    - `./cage/`: folder contains samples of generated POCs
 
 
 ## Requirements<br />
