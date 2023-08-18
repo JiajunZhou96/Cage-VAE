@@ -252,7 +252,7 @@ class VAE(nn.Module):
         return mu, logvar, recon_loss, c_recon_loss, prop_loss, accuracy
     
     
-    def inference(self, inf_batch_size, max_len, temp, z = None):
+    def generate(self, inf_batch_size, max_len, temp, z = None):
         
         
         with torch.no_grad():
@@ -595,7 +595,7 @@ def gen_results_df(gen_mols, gen_bb1, gen_reaction, pred, index_to_smile, ordina
 def random_sampling(model = None, batch_size = None, index_to_smile = None, ordinal_encoder = None):
     
     model.eval()
-    gen_mols, gen_bb1, gen_reaction, pred, _ = model.inference(inf_batch_size =  batch_size, max_len = config["max_len"], temp = 1)
+    gen_mols, gen_bb1, gen_reaction, pred, _ = model.generate(inf_batch_size =  batch_size, max_len = config["max_len"], temp = 1)
     
     gen_results = gen_results_df(gen_mols, gen_bb1, gen_reaction, pred, index_to_smile, ordinal_encoder)
     
@@ -604,7 +604,7 @@ def random_sampling(model = None, batch_size = None, index_to_smile = None, ordi
 def latent_to_mol(model = None, z_input = None, batch_size = None, index_to_smile = None, ordinal_encoder = None):
     
     model.eval()
-    gen_mols, gen_bb1, gen_reaction, pred, _ = model.inference(inf_batch_size =  batch_size, max_len = config["max_len"], temp = 1, z = z_input)
+    gen_mols, gen_bb1, gen_reaction, pred, _ = model.generate(inf_batch_size =  batch_size, max_len = config["max_len"], temp = 1, z = z_input)
     
     gen_results = gen_results_df(gen_mols, gen_bb1, gen_reaction, pred, index_to_smile, ordinal_encoder)
     
@@ -658,7 +658,7 @@ def interpolation(z_1, z_2, steps, model, mode, index_to_smile, ordinal_encoder)
     elif mode == 'slerp-circle':
         z_0 = torch.from_numpy(slerp(start=z_1, end=z_2, steps = steps, slerp_type = 'circle')).float().cuda()
         
-    gen_mols, gen_bb1, gen_reaction, pred, _ = model.inference(inf_batch_size = z_0.size()[0], max_len = config["max_len"], temp = 1, z = z_0)
+    gen_mols, gen_bb1, gen_reaction, pred, _ = model.generate(inf_batch_size = z_0.size()[0], max_len = config["max_len"], temp = 1, z = z_0)
     gen_results = gen_results_df(gen_mols, gen_bb1, gen_reaction, pred, index_to_smile, ordinal_encoder)
     
     return gen_results, z_0
@@ -666,7 +666,7 @@ def interpolation(z_1, z_2, steps, model, mode, index_to_smile, ordinal_encoder)
 def reconstruct_molecules_batch(input_data, model, index_to_smile, ordinal_encoder):
     
     mu, z = model.input_to_latent(input_data)
-    recon_mols, recon_bb1, recon_reaction, recon_pred, _ = model.inference(inf_batch_size = input_data.shape[0], max_len = config["max_len"], temp = 1, z = mu)
+    recon_mols, recon_bb1, recon_reaction, recon_pred, _ = model.generate(inf_batch_size = input_data.shape[0], max_len = config["max_len"], temp = 1, z = mu)
     
     recon_smiles = eutils.idx_to_smiles(recon_mols, index_to_smile)
     recon_smiles = [eutils.remove_sos_eos(smile, mode = 'smile') for smile in recon_smiles]
@@ -721,7 +721,7 @@ def reconstruct_around_single_molecule_repeat(input_data, index, batch_size, mod
     input_boost = np.repeat(input_data, batch_size, axis=0)
     
     mu, z = model.input_to_latent(input_boost)
-    recon_mols, recon_bb1, recon_reaction, recon_pred, _ = model.inference(inf_batch_size = input_boost.shape[0], max_len = config["max_len"], temp = 1, z = z)
+    recon_mols, recon_bb1, recon_reaction, recon_pred, _ = model.generate(inf_batch_size = input_boost.shape[0], max_len = config["max_len"], temp = 1, z = z)
     recon_smiles = eutils.idx_to_smiles(recon_mols, index_to_smile)
     recon_smiles = [eutils.remove_sos_eos(smile, mode = 'smile') for smile in recon_smiles]
     
@@ -855,7 +855,7 @@ class VAE_only(nn.Module):
         return mu, logvar, recon_loss, c_recon_loss
     
     
-    def inference(self, inf_batch_size, max_len, temp, z = None):
+    def generate(self, inf_batch_size, max_len, temp, z = None):
         
         
         with torch.no_grad():
