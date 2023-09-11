@@ -46,7 +46,7 @@ $ pip install pandas==1.3.3
 $ pip install matplotlib==3.2.1
 $ pip install seaborn==0.11.2
 $ pip install scikit-learn==0.22.1
-$ pip install torch==1.9.1+cu111 -f https://download.pytorch.org/whl/torch_stable.html
+$ pip install torch==1.9.1+cu102 -f https://download.pytorch.org/whl/torch_stable.html
 $ pip install torchvision==0.2.2
 $ conda install -c conda-forge rdkit=2020.09.1.0 
 $ pip install stk==2021.8.2.0
