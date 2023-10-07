@@ -483,8 +483,8 @@ def train(model = None, optimizer = None, train_dataloader = None, test_dataload
 
     for epoch in range(n_epochs):
         
-        model.train() # 这一行代码等价于 model.train(True)
-        for i, dat in enumerate(train_dataloader):  # 要记得把 feature也 encoding 进去啊！！！！还有 y
+        model.train()
+        for i, dat in enumerate(train_dataloader):
             model.train()
             
             mol, mol_len, features, target, idt = dat
