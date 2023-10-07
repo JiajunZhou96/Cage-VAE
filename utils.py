@@ -232,7 +232,7 @@ def plot_frequency(recon_smiles, recon_bb1, recon_reaction, ordinal_encoder):
     plt.xlabel('SMILES', fontproperties = 'Times New Roman', fontsize = 28, labelpad = 160)
     plt.ylabel('Frequency', fontproperties = 'Times New Roman', fontsize = 28)
 
-    plt.tick_params(axis = 'both', which = 'major', labelsize = 10, labelbottom=False) # labelbottom=False 的意思是把底部的 label 去掉
+    plt.tick_params(axis = 'both', which = 'major', labelsize = 10, labelbottom=False)
     if not os.path.exists('./figures'):
         os.makedirs('./figures')
     plt.savefig('./figures/figure_frequency.png')  
