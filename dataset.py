@@ -146,10 +146,6 @@ def data_prep_selfie(dataset, undataset):
     undataset['bb2_selfie_sk'] = eutils.to_selfies(undataset['bb2_skeleton'])
     
     max_len = 57
-    
-    #selfie_char = list(sf.get_alphabet_from_selfies(undataset['bb2_selfie_sk'].append( dataset['bb2_selfie_sk'])))
-    #special_char = ['[nop]','[sos]','[eos]']
-    #selfie_char_list = special_char + selfie_char
     selfie_char_list = utils.load_vocab("./vocab/selfie_vocab.npy")
     
     data_prep_selfie.selfie_to_index = dict((c,i) for i,c in enumerate(selfie_char_list))
