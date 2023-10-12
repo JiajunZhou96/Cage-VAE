@@ -194,6 +194,47 @@ def to_canonical_smiles(smiles):
 
     return np.array(canonical_smiles)
 
+import selfies as sf
+
+def to_selfie(smile):
+
+    smile_canonical = Chem.MolToSmiles(Chem.MolFromSmiles(smile)) # canonicalize
+    selfie = sf.encoder(smile_canonical)
+
+    return selfie
+
+def to_selfies(smiles):
+
+    selfies = [to_selfie(smile) for smile in smiles]
+
+    return np.array(selfies)
+
+def selfie_vocab_len(selfie_char_list):
+
+    return len(selfie_char_list)
+
+def selfies_to_idx(selfies_df:pd.DataFrame, max_len, selfie_to_index) -> list:
+
+    labels = []
+    for selfie in selfies_df:
+        label, _ = sf.selfies_to_encoding(selfies=selfie, vocab_stoi = selfie_to_index, pad_to_len= max_len, enc_type="both")
+        labels.append(label)
+
+    return labels
+
+def idx_to_selfie(index_mol: list, index_to_selfie)-> list:
+
+    selfie = ""
+    for i in range(0, len(index_mol)):
+        selfie += index_to_selfie[index_mol[i]]
+    return selfie
+
+def idx_to_selfies(index_mols: list, index_to_selfie)-> list:
+
+    selfies = [idx_to_selfie(index_mol, index_to_selfie) for index_mol in index_mols]
+
+    return selfies
+
 
 def add_eos(mol: str, mode = 'smile'):
 
