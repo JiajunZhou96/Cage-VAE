@@ -47,6 +47,7 @@ $ pip install torch==1.9.1+cu111 -f https://download.pytorch.org/whl/torch_stabl
 $ pip install torchvision==0.2.2
 $ conda install -c conda-forge rdkit=2020.09.1.0 
 $ pip install stk==2021.8.2.0
+$ pip install selfies==2.0.0
 $ pip install GPyOpt==1.2.6
 $ conda install -c conda-forge/label/cf202003 openbabel=3.0.0
 $ conda install -c conda-forge pymatgen=2022.1.7
