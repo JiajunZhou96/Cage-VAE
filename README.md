@@ -18,7 +18,6 @@ In this work, we present a VAE model, Cage-VAE, for the targeted generation of s
     - `training.py`: Training of a new Cage-VAE.
     - `model_eval.py`: Integrated evaluations of an existing Cage-VAE.
     - `conditional_generation.py`: conditional generation of shape-persistent POCs using sampling methods.
-    - `./other_evals/model_eval_without_predictor.py`: evaluations of VAE-only model.
 
 - Utils
 
@@ -27,8 +26,6 @@ In this work, we present a VAE model, Cage-VAE, for the targeted generation of s
     - `VAE`: import as VAE, VAE architecture and methods.
     - `generation_utils`:import as g_utils, useful tools for molecular generations.
     - `utils`: import as utils, other utils.
-    - `./model/`: all pre-trained model.
-    - `./vocab/`: the vocabulary of tokens
 
 - Results
 
