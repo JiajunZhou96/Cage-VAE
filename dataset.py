@@ -174,10 +174,10 @@ def data_prep_selfie(dataset, undataset):
     un_ordinal_treat = pd.concat([undataset['bb1_skeleton'], undataset['reaction']], axis = 1)
     un_features_list = data_prep_selfie.ordinalenc.transform(un_ordinal_treat)
 
-    collapse_label = dataset['collapsed'] # shape persistency 输入！！
+    collapse_label = dataset['collapsed']
 
-    undataset['collapsed'] = -1  # 设置为 -1
-    uncollapse_label = undataset['collapsed'] # shape persistency 输入！！
+    undataset['collapsed'] = -1
+    uncollapse_label = undataset['collapsed']
 
     dataset['indicator'] = 1
     undataset['indicator'] = 0
