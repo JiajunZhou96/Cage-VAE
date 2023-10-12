@@ -975,3 +975,40 @@ def load_VAE_only(pretrained = False):
     
     return model
 
+def load_VAE_selfie(pretrained = True):
+    
+    # specify dims and parameters
+    bb1_vocab_dim = config["bb1_vocab_dim"]  
+    reaction_vocab_dim = config["reaction_vocab_dim"]
+
+    enc_dropout = config["enc_dropout"]
+    dec_dropout = config["dec_dropout"]
+    c_enc_dropout = config["c_enc_dropout"]
+    c_dec_dropout = config["c_dec_dropout"]
+    prop_dropout = config["prop_dropout"]
+
+    vocab_dim = config["vocab_dim"]
+    enc_emb_dim = config["enc_emb_dim"]
+    latent_dim = config["latent_dim"]
+    enc_hidden_dim = config["enc_hidden_dim"]
+    dec_hidden_dim = config["dec_hidden_dim"]
+
+    target_dim = config["target_dim"]
+
+    pad_idx = config["pad_idx"]
+    sos_idx = config["sos_idx"]
+    eos_idx = config["eos_idx"]
+
+    device = torch.device('cuda')
+
+    enc = Encoder(vocab_dim, enc_emb_dim, enc_hidden_dim, enc_dropout, pad_idx)
+    dec = Decoder(vocab_dim, enc.embedding, enc_emb_dim, dec_hidden_dim, latent_dim, dec_dropout, pad_idx)
+    c_enc = CategoryEncoder(bb1_vocab_dim, reaction_vocab_dim, enc_emb_dim, enc_hidden_dim, c_enc_dropout)
+    c_dec =  CategoryDecoder(bb1_vocab_dim, reaction_vocab_dim, enc_emb_dim, dec_hidden_dim, latent_dim, c_dec_dropout)
+    prop_pred = PropertyPredictor(latent_dim, target_dim, prop_dropout)
+    model = VAE(enc, dec, c_enc, c_dec, prop_pred, latent_dim, sos_idx, eos_idx, pad_idx).to(device)
+    model.apply(weight_init)
+
+    load_pretrained(model, pretrained = pretrained, model_path = "./model/VAE_Model_SELFIE.pth")
+    
+    return model
