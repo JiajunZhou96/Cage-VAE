@@ -601,6 +601,25 @@ def random_sampling(model = None, batch_size = None, index_to_smile = None, ordi
     
     return gen_results
 
+import selfies as sf
+def random_sampling_selfie(model = None, batch_size = None, index_to_selfie = None, ordinal_encoder = None):
+    
+    model.eval()
+    gen_mols, gen_bb1, gen_reaction, _, _ = model.inference(inf_batch_size =  batch_size, max_len = config["max_len"], temp = 1)
+    
+    gen_selfies = eutils.idx_to_selfies(gen_mols, index_to_selfie) # index_to_smile 需要在之前是 global
+    gen_selfies_de = [eutils.remove_sos_eos(smile, mode = 'selfie') for smile in gen_selfies]
+    gen_smiles_de = [sf.decoder(selfie) for selfie in gen_selfies_de]
+    gen_smiles_de = [Chem.MolToSmiles(Chem.MolFromSmiles(smile)) for smile in gen_smiles_de]  # 需要 canonicalize
+    
+    ordinal_inverse = np.array([gen_bb1,gen_reaction]).T
+    bb1_and_reaction = ordinal_encoder.inverse_transform(ordinal_inverse)
+    
+    gen_results = pd.DataFrame({"bb1_sk":bb1_and_reaction[:,0], "bb2_sk": gen_smiles_de, "bb2_sk_sf": gen_selfies_de, "reaction type": bb1_and_reaction[:,1]})
+    
+    return gen_results
+    
+
 def latent_to_mol(model = None, z_input = None, batch_size = None, index_to_smile = None, ordinal_encoder = None):
     
     model.eval()
