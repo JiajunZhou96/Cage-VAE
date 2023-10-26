@@ -54,7 +54,7 @@ gen_results = VAE.random_sampling(model = model, batch_size = 1000, index_to_smi
 ############### evaluations
 validity, idx_valid, validity_list = autils.validity_smiles(gen_results['bb2_sk'])
 precursor_validity = autils.precursor_validity(gen_results['bb2_sk'], validity_list)
-symmetry_smiles = autils.symmetry_smiles(gen_results['bb2_sk'], validity_list)  # symmetry 方面要调整
+symmetry_smiles = autils.symmetry_smiles(gen_results['bb2_sk'], validity_list)
 
 novelty1 = autils.novelty_cages(gen_results['bb2_sk'], gen_results['bb1_sk'], gen_results['reaction type'], idx_valid, 
             (dataset['bb2_skeleton'].tolist()), 
