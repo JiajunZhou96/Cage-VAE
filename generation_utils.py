@@ -107,7 +107,7 @@ def multi_bo(batch = 20, start_x = None, start_y = None,
                                 bb1_string, bb1_factory = eutils.construct_bb(gauss_results['bb1_sk'][0], gauss_results['reaction type'][0])
                                 bb2_string, bb2_factory = eutils.construct_bb(gauss_results['bb2_sk'][0], gauss_results['reaction type'][0])
                                 
-                                if autils.point_group_symmetry(gauss_results['bb2_sk'][0]):
+                                if autils.point_group_symmetry(gauss_results['bb2_sk'][0]): # or autils.graph_canonical_labeling_symmetry
                                     
                                     if autils.wrong_reactionsite_detect(bb2_string, gauss_results['reaction type'][0]):
                                         break
@@ -254,7 +254,7 @@ def interpolation_generation(lerp_type = "slerp-in", steps = 6, threshold = 0.8,
                                 bb1_string, bb1_factory = eutils.construct_bb(intp_deduplicated['bb1_sk'].iloc[i], intp_deduplicated['reaction type'].iloc[i])
                                 bb2_string, bb2_factory = eutils.construct_bb(intp_deduplicated['bb2_sk'].iloc[i], intp_deduplicated['reaction type'].iloc[i])
                                 
-                                if autils.point_group_symmetry(intp_deduplicated['bb2_sk'].iloc[i]):
+                                if autils.point_group_symmetry(intp_deduplicated['bb2_sk'].iloc[i]): # or autils.graph_canonical_labeling_symmetry
                                     
                                     if autils.wrong_reactionsite_detect(bb2_string, intp_deduplicated['reaction type'].iloc[i]):
                                         
