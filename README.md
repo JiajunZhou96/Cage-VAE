@@ -1,5 +1,5 @@
 # Deep Generative Design of Porous Organic Cages via a Variational Autoencoder
-This repository contains data and codes for Cage-VAE [Deep generative design of porous organic cages via a variational autoencoder](https://pubs.rsc.org/en/content/articlehtml/2023/dd/d3dd00154g).
+This repository contains data and codes for Cage-VAE in our paper [Deep generative design of porous organic cages via a variational autoencoder](https://pubs.rsc.org/en/content/articlehtml/2023/dd/d3dd00154g).
 
 ## Description
 ![image](vaearchitecture.png)
